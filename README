@@ -1,3 +1,250 @@
 # Frontend React Vite with D3 for Graph Visualization
 # to start
 npm start
+
+# Prompt testing
+# simple context
+in the Computer Science class for Masters degree, there are 12 students, 1 from Indonesia, 1 from Russia, 1 from Japan, 3 from Africa, 1 from Slovakia, and the rest are from China
+
+A CS Masters program tracks student performance:
+- Fall 2023: Average GPA 3.2
+- Spring 2024: Average GPA 3.4
+- Fall 2024: Average GPA 3.5
+- Spring 2025: Average GPA 3.6
+
+Company revenue over the last 8 quarters:
+- Q1 2023: $2.5M
+- Q2 2023: $2.8M
+- Q3 2023: $3.1M
+- Q4 2023: $3.5M
+- Q1 2024: $3.8M
+- Q2 2024: $4.2M
+- Q3 2024: $4.6M
+- Q4 2024: $5.1M
+
+Hospital patient distribution by age group:
+- 0-18 years: 145 patients
+- 19-35 years: 320 patients
+- 36-50 years: 285 patients
+- 51-65 years: 210 patients
+- 65+ years: 165 patients
+Show the age distribution of our patients.
+
+# Dijkstra
+import networkx as nx
+
+G = nx.DiGraph()
+G.add_nodes_from([
+    'Airport', 'CityCenter', 'University', 'Hospital',
+    'ShoppingMall', 'ResidentialA', 'ResidentialB', 'IndustrialZone'
+])
+
+G.add_weighted_edges_from([
+    ('Airport',       'CityCenter',    45),
+    ('Airport',       'IndustrialZone', 20),
+    ('CityCenter',    'University',    15),
+    ('CityCenter',    'Hospital',      10),
+    ('CityCenter',    'ShoppingMall',  12),
+    ('CityCenter',    'ResidentialA',  20),
+    ('University',    'ResidentialA',  10),
+    ('University',    'Hospital',      18),
+    ('Hospital',      'ResidentialB',  14),
+    ('ShoppingMall',  'ResidentialA',   8),
+    ('ShoppingMall',  'ResidentialB',  11),
+    ('ResidentialA',  'ResidentialB',   9),
+    ('ResidentialB',  'IndustrialZone', 25),
+    ('IndustrialZone','CityCenter',    30),
+])
+
+Find the fastest route from Airport to ResidentialB using Dijkstra.
+Visualize the entire transportation network.
+
+# Dijkstra
+graph = {
+    'Jakarta':   {'Bandung': 150, 'Semarang': 450, 'Surabaya': 800},
+    'Bandung':   {'Jakarta': 150, 'Yogyakarta': 310, 'Semarang': 370},
+    'Semarang':  {'Jakarta': 450, 'Bandung': 370, 'Surabaya': 310, 'Yogyakarta': 130},
+    'Yogyakarta':{'Bandung': 310, 'Semarang': 130, 'Surabaya': 320, 'Malang': 200},
+    'Surabaya':  {'Jakarta': 800, 'Semarang': 310, 'Yogyakarta': 320, 'Malang': 90},
+    'Malang':    {'Yogyakarta': 200, 'Surabaya': 90}
+}
+source = 'Jakarta'
+target = 'Malang'
+Find the shortest route from Jakarta to Malang using Dijkstra algorithm.
+
+# Social Network
+nodes = [
+    {"id": "Alice",   "group": "AI"},
+    {"id": "Bob",     "group": "AI"},
+    {"id": "Charlie", "group": "DB"},
+    {"id": "Diana",   "group": "DB"},
+    {"id": "Eve",     "group": "CV"},
+    {"id": "Frank",   "group": "CV"},
+    {"id": "Grace",   "group": "AI"},
+    {"id": "Henry",   "group": "DB"},
+    {"id": "Ivan",    "group": "CV"},
+    {"id": "Julia",   "group": "AI"}
+]
+
+edges = [
+    ("Alice",   "Bob",     3),
+    ("Alice",   "Grace",   5),
+    ("Alice",   "Julia",   4),
+    ("Bob",     "Charlie", 2),
+    ("Bob",     "Diana",   1),
+    ("Charlie", "Diana",   6),
+    ("Charlie", "Henry",   3),
+    ("Diana",   "Henry",   4),
+    ("Eve",     "Frank",   5),
+    ("Eve",     "Ivan",    3),
+    ("Frank",   "Ivan",    2),
+    ("Grace",   "Julia",   4),
+    ("Henry",   "Ivan",    2),
+    ("Alice",   "Eve",     1),
+    ("Bob",     "Frank",   1)
+]
+
+Show the research collaboration network and detect communities.
+
+# Social Network
+In the Computer Science Masters program, 12 students collaborate on research:
+
+Student info:
+- Henry (Indonesia)  - research: AI Visualization
+- Wei (China)        - research: Graph Neural Networks
+- Li (China)         - research: Graph Neural Networks
+- Zhang (China)      - research: Database Systems
+- Chen (China)       - research: Database Systems
+- Liu (China)        - research: Computer Vision
+- Yuki (Japan)       - research: Computer Vision
+- Ivan (Russia)      - research: Cybersecurity
+- Petra (Slovakia)   - research: Cybersecurity
+- Kwame (Africa)     - research: NLP
+- Amara (Africa)     - research: NLP
+- Kofi (Africa)      - research: AI Visualization
+
+Collaboration pairs (worked on papers together):
+Henry-Wei (5 papers), Henry-Yuki (3), Henry-Kofi (4), Henry-Kwame (2),
+Wei-Li (6), Wei-Zhang (4), Wei-Henry (5),
+Li-Zhang (3), Li-Liu (2),
+Zhang-Chen (5), Zhang-Liu (2),
+Chen-Liu (3),
+Liu-Yuki (4),
+Yuki-Henry (3),
+Ivan-Petra (6), Ivan-Wei (1),
+Petra-Zhang (2),
+Kwame-Amara (5), Kwame-Kofi (3),
+Amara-Kofi (4), Amara-Henry (2)
+
+Visualize the collaboration network. Detect research communities.
+Edge weight = number of co-authored papers.
+
+# Edge List
+Internet router topology (edge list with latency in ms):
+
+Routers: R1, R2, R3, R4, R5, R6, R7, R8
+
+Connections:
+R1 - R2 : 5ms
+R1 - R3 : 8ms
+R2 - R4 : 3ms
+R2 - R5 : 6ms
+R3 - R5 : 4ms
+R3 - R6 : 9ms
+R4 - R7 : 7ms
+R5 - R7 : 5ms
+R5 - R8 : 6ms
+R6 - R8 : 3ms
+R7 - R8 : 4ms
+
+Find shortest latency path from R1 to R8.
+Visualize the full router network with edge weights.
+
+# Community Detection
+Twitter-like follower influence network (directed):
+
+Influencer connections:
+TechGuru    → CodeNinja, DataWiz, AIResearcher, StartupCEO
+CodeNinja   → TechGuru, OpenSourceDev, WebDev
+DataWiz     → TechGuru, AIResearcher, MLEngineer, DataScientist
+AIResearcher→ DataWiz, MLEngineer, DeepLearner
+StartupCEO  → TechGuru, InvestorA, ProductMgr
+OpenSourceDev→ CodeNinja, WebDev, DevOpsGuy
+WebDev      → CodeNinja, UIDesigner, FrontendDev
+MLEngineer  → DataWiz, AIResearcher, DeepLearner, DataScientist
+DataScientist→ DataWiz, MLEngineer, StatisticsProf
+DeepLearner → AIResearcher, MLEngineer
+InvestorA   → StartupCEO, ProductMgr
+ProductMgr  → StartupCEO, UIDesigner
+UIDesigner  → WebDev, FrontendDev
+FrontendDev → WebDev, UIDesigner
+DevOpsGuy   → OpenSourceDev, CodeNinja
+StatisticsProf→ DataScientist, DataWiz
+
+Calculate PageRank to find the most influential accounts.
+Detect communities (tech clusters).
+
+# Floyd Warshall
+Distance matrix for network nodes A, B, C, D, E:
+
+       A     B     C     D     E
+A  [   0,    3,  INF,    7,  INF ]
+B  [   8,    0,    2,  INF,  INF ]
+C  [   5,  INF,    0,    1,  INF ]
+D  [   2,  INF,  INF,    0,    3 ]
+E  [ INF,  INF,    4,  INF,    0 ]
+
+Apply Floyd-Warshall algorithm to find shortest distances between ALL pairs of nodes.
+Show the result as a heatmap.
+
+# Kruskal - Minimum Spanning Tree
+We need to connect 6 office buildings with network cables.
+The cost (meters of cable) between each pair:
+
+Edges (building1, building2, cable_length):
+(HQ,    Finance,   10)
+(HQ,    IT,         6)
+(HQ,    HR,         5)
+(Finance, IT,       15)
+(Finance, HR,       8)
+(Finance, Sales,    12)
+(IT,    HR,          4)
+(IT,    Sales,       9)
+(HR,    Sales,      11)
+(Sales, Warehouse,   7)
+(IT,    Warehouse,  13)
+
+Find the Minimum Spanning Tree to connect all buildings with minimum cable.
+Use Kruskal's algorithm.
+
+# BFS
+Social media friend graph (starting from User1):
+
+User1 follows: User2, User3, User4
+User2 follows: User5, User6
+User3 follows: User7, User8
+User4 follows: User9
+User5 follows: User10, User11
+User6 follows: User12
+User7 follows: User13
+
+Apply BFS starting from User1.
+Show the traversal order and tree structure — this is how friend recommendations work.
+
+# Hierarchy
+University organizational hierarchy:
+
+Rector manages: VP_Academic, VP_Finance, VP_Student
+
+VP_Academic manages: Dean_Engineering, Dean_Science, Dean_Business
+VP_Finance manages: Budget_Office, Procurement
+VP_Student manages: Student_Affairs, Career_Center, Counseling
+
+Dean_Engineering manages: CS_Dept, EE_Dept, ME_Dept
+Dean_Science manages: Physics_Dept, Math_Dept, Chemistry_Dept
+Dean_Business manages: MBA_Program, Finance_Dept
+
+CS_Dept manages: Prof_AI, Prof_DB, Prof_SE
+
+Visualize this university organizational hierarchy as a tree.
+
